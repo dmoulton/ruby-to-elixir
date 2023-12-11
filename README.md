@@ -1,2 +1,2 @@
-# elixir-devcontainer
-Simple devcontainer for vscode development of elixir and postgres
+# From Ruby to Elixir
+Following along with "From Ruby to Elixir", a book from the Pragmatic Bookshelf

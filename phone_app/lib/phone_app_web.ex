@@ -1,3 +1,11 @@
+#---
+# Excerpted from "From Ruby to Elixir",
+# published by The Pragmatic Bookshelf.
+# Copyrights apply to this code. It may not be used to create training material,
+# courses, books, articles, and the like. Contact us if you are in doubt.
+# We make no guarantees that this code is fit for any purpose.
+# Visit https://pragprog.com/titles/sbelixir for more book information.
+#---
 defmodule PhoneAppWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
@@ -16,6 +24,11 @@ defmodule PhoneAppWeb do
   below. Instead, define additional modules and import
   those modules here.
   """
+
+  # Phoenix uses dynamic programming to clean up the `use` function
+  defmacro __using__(which) when is_atom(which) do
+    apply(__MODULE__, which, [])
+  end
 
   def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
 
@@ -102,12 +115,5 @@ defmodule PhoneAppWeb do
         router: PhoneAppWeb.Router,
         statics: PhoneAppWeb.static_paths()
     end
-  end
-
-  @doc """
-  When used, dispatch to the appropriate controller/view/etc.
-  """
-  defmacro __using__(which) when is_atom(which) do
-    apply(__MODULE__, which, [])
   end
 end

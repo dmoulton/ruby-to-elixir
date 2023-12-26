@@ -7,10 +7,10 @@
 # Visit https://pragprog.com/titles/sbelixir for more book information.
 #---
 defmodule PhoneApp.Conversations.Schema.SmsMessage do
-  use Ecto.Schema
+  use Ecto.Schema 
 
-  @timestamps_opts [type: :utc_datetime_usec]
-  schema "sms_messages" do
+  @timestamps_opts [type: :utc_datetime_usec] 
+  schema "sms_messages" do 
     # 1-to-many relationship with the other person in the conversation
     belongs_to :contact, PhoneApp.Conversations.Schema.Contact
 

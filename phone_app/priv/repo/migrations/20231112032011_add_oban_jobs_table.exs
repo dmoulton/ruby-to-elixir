@@ -6,12 +6,14 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/sbelixir for more book information.
 #---
-defmodule PhoneAppWeb.PageController do
-  use PhoneAppWeb, :controller
+defmodule PhoneApp.Repo.Migrations.AddObanJobsTable do
+  use Ecto.Migration
 
-  def home(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-    render(conn, :home, layout: false)
+  def up do
+    Oban.Migration.up(version: 11)
+  end
+
+  def down do
+    Oban.Migration.down(version: 1)
   end
 end

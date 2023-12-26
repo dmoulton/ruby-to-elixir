@@ -15,15 +15,15 @@ defmodule PhoneApp.Conversations.Query.ContactStore do
   end
 
   def upsert_contact(%{from: from, to: to, direction: direction}) do
-    contact_number =
+    contact_number = 
       case direction do
         :incoming -> from
         :outgoing -> to
       end
 
-    cs = Contact.changeset(%{phone_number: contact_number})
+    cs = Contact.changeset(%{phone_number: contact_number}) 
 
-    Repo.insert(
+    Repo.insert( 
       cs,
       on_conflict: {:replace, [:updated_at]},
       conflict_target: [:phone_number]

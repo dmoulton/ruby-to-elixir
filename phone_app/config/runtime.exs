@@ -1,3 +1,11 @@
+#---
+# Excerpted from "From Ruby to Elixir",
+# published by The Pragmatic Bookshelf.
+# Copyrights apply to this code. It may not be used to create training material,
+# courses, books, articles, and the like. Contact us if you are in doubt.
+# We make no guarantees that this code is fit for any purpose.
+# Visit https://pragprog.com/titles/sbelixir for more book information.
+#---
 import Config
 
 # config/runtime.exs is executed for all environments, including
@@ -50,8 +58,6 @@ if config_env() == :prod do
 
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
-
-  config :phone_app, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :phone_app, PhoneAppWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],

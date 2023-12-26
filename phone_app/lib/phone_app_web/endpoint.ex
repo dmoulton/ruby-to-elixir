@@ -1,5 +1,15 @@
+#---
+# Excerpted from "From Ruby to Elixir",
+# published by The Pragmatic Bookshelf.
+# Copyrights apply to this code. It may not be used to create training material,
+# courses, books, articles, and the like. Contact us if you are in doubt.
+# We make no guarantees that this code is fit for any purpose.
+# Visit https://pragprog.com/titles/sbelixir for more book information.
+#---
 defmodule PhoneAppWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :phone_app
+
+  # ... Many lines outlining your application's request flow
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -7,7 +17,7 @@ defmodule PhoneAppWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_phone_app_key",
-    signing_salt: "gPZgm6ru",
+    signing_salt: "/CdNKvX6",
     same_site: "Lax"
   ]
 

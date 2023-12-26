@@ -1,3 +1,11 @@
+#---
+# Excerpted from "From Ruby to Elixir",
+# published by The Pragmatic Bookshelf.
+# Copyrights apply to this code. It may not be used to create training material,
+# courses, books, articles, and the like. Contact us if you are in doubt.
+# We make no guarantees that this code is fit for any purpose.
+# Visit https://pragprog.com/titles/sbelixir for more book information.
+#---
 import Config
 
 # Configure your database
@@ -14,19 +22,22 @@ config :phone_app, PhoneApp.Repo,
 # debugging and code reloading.
 #
 # The watchers configuration can be used to run external
-# watchers to your application. For example, we can use it
-# to bundle .js and .css sources.
+# watchers to your application. For example, we use it
+# with esbuild to bundle .js and .css sources.
 config :phone_app, PhoneAppWeb.Endpoint,
+  http: [ip: {127, 0, 0, 1}, port: 4004],
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "BlAkOOJcO5pxbDKP4QTDX9HdZMJLWgqBiDpndhEX5pA2MkW61pnOsPIsHMdO5PrD",
+  secret_key_base: "QoAqhnPAGix/KFNcLtt6A5aGlSlBb1s7Q4l9WxeSGVNksGMeCBkNhUVMlPoS/oiL",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+    esbuild:
+      {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+
+    tailwind:
+      {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -68,6 +79,8 @@ config :phone_app, dev_routes: true
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
+config :logger, level: :info
+
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
@@ -75,8 +88,7 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-# Include HEEx debug annotations as HTML comments in rendered markup
-config :phoenix_live_view, :debug_heex_annotations, true
-
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+import_config "./dev.secret.exs"

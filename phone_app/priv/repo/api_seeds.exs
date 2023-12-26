@@ -8,9 +8,9 @@
 #---
 # Script for populating the database. You can run it as:
 #
-#     mix run priv/repo/seeds.exs
+#     mix run priv/repo/api_seeds.exs
 #
-
+# These seeds are useful for putting larger amounts of data in the mock API server
 defmodule SeedHelpers do
   def number_pool do
     for _ <- 1..20, do: invalid_fake_number()
@@ -38,25 +38,13 @@ end
 your_number = "+12223334444"
 number_pool = SeedHelpers.number_pool()
 
-for _ <- 1..500 do
+for _ <- 1..100 do
   other_party = Enum.random(number_pool)
-  direction = Enum.random([:incoming, :outgoing])
 
-  {from, to} =
-    case direction do
-      :incoming -> {other_party, your_number}
-      :outgoing -> {your_number, other_party}
-    end
-
-  params = %{
-    message_sid: "seed-" <> Ecto.UUID.generate(),
-    account_sid: "seed",
-    body: Faker.Lorem.paragraph(1..3),
-    from: from,
-    to: to,
-    status: "seeded",
-    direction: direction
+  params = %PhoneApp.Conversations.Schema.NewMessage{
+    to: other_party,
+    body: Faker.Lorem.sentences(1..4) |> Enum.join(" ")
   }
 
-  {:ok, _} = PhoneApp.Conversations.create_sms_message(params)
+  {:ok, _} = PhoneApp.Conversations.send_sms_message(params)
 end

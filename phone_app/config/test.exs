@@ -1,3 +1,11 @@
+#---
+# Excerpted from "From Ruby to Elixir",
+# published by The Pragmatic Bookshelf.
+# Copyrights apply to this code. It may not be used to create training material,
+# courses, books, articles, and the like. Contact us if you are in doubt.
+# We make no guarantees that this code is fit for any purpose.
+# Visit https://pragprog.com/titles/sbelixir for more book information.
+#---
 import Config
 
 # Configure your database
@@ -17,7 +25,7 @@ config :phone_app, PhoneApp.Repo,
 # you can enable the server option below.
 config :phone_app, PhoneAppWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "TU9GaO0NMgVG2Tp7mKaz08JHciAg8kauy8ODgyHBWBRI7FbST8+Fjo/WWCp0plBf",
+  secret_key_base: "VGFbvBPV4M/5ZhUgTiK2vlYYaHwXVKs1tPevVzD03AL7+VFKNyQXfXLJeynZpVsv",
   server: false
 
 # In test we don't send emails.
@@ -31,3 +39,5 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :phone_app, Oban, testing: :manual

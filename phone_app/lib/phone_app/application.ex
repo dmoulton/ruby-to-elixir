@@ -1,3 +1,11 @@
+#---
+# Excerpted from "From Ruby to Elixir",
+# published by The Pragmatic Bookshelf.
+# Copyrights apply to this code. It may not be used to create training material,
+# courses, books, articles, and the like. Contact us if you are in doubt.
+# We make no guarantees that this code is fit for any purpose.
+# Visit https://pragprog.com/titles/sbelixir for more book information.
+#---
 defmodule PhoneApp.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
@@ -10,13 +18,9 @@ defmodule PhoneApp.Application do
     children = [
       PhoneAppWeb.Telemetry,
       PhoneApp.Repo,
-      {DNSCluster, query: Application.get_env(:phone_app, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: PhoneApp.PubSub},
-      # Start the Finch HTTP client for sending emails
       {Finch, name: PhoneApp.Finch},
-      # Start a worker by calling: PhoneApp.Worker.start_link(arg)
-      # {PhoneApp.Worker, arg},
-      # Start to serve requests, typically the last entry
+      {Oban, Application.fetch_env!(:phone_app, Oban)},
       PhoneAppWeb.Endpoint
     ]
 

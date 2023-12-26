@@ -6,12 +6,15 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/sbelixir for more book information.
 #---
-defmodule PhoneAppWeb.PageController do
-  use PhoneAppWeb, :controller
+# Script for removing all seeded data from the database. You can run it as:
+#
+#     mix run priv/repo/delete_seeds.exs
+#
 
-  def home(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-    render(conn, :home, layout: false)
-  end
-end
+import Ecto.Query
+
+from(
+  m in PhoneApp.Conversations.Schema.SmsMessage,
+  where: m.account_sid == "seed"
+)
+|> PhoneApp.Repo.delete_all()

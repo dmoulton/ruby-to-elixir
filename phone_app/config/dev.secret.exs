@@ -6,12 +6,11 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/sbelixir for more book information.
 #---
-defmodule PhoneAppWeb.PageController do
-  use PhoneAppWeb, :controller
+import Config
 
-  def home(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-    render(conn, :home, layout: false)
-  end
-end
+config :phone_app, :twilio,
+  key_sid: "mock-key-sid",
+  key_secret: "mock-key",
+  account_sid: "mock-account",
+  number: "+19998887777",
+  base_url: "http://localhost:4005/2010-04-01"
